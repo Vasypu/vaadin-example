@@ -6,11 +6,10 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -36,6 +35,18 @@ public class MyUI extends UI {
         });
         
         layout.addComponents(name, button);
+
+        List<Person> people = Arrays.asList(
+                new Person("Nicolaus Copernicus", 1543),
+                new Person("Galileo Galilei", 1564),
+                new Person("Johannes Kepler", 1571));
+
+// Create a grid bound to the list
+        Grid<Person> grid = new Grid<>();
+        grid.setItems(people);
+        grid.addColumn(Person::getName).setCaption("Name");
+        grid.addColumn(Person::getAge).setCaption("Year of birth");
+        layout.addComponent(grid);
         
         setContent(layout);
     }
