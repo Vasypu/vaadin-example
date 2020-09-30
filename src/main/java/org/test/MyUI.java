@@ -1,6 +1,7 @@
 package org.test;
 
 import javax.servlet.annotation.WebServlet;
+import javax.xml.bind.JAXBException;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -8,6 +9,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,15 +35,26 @@ public class MyUI extends UI {
             layout.addComponent(new Label("Thanks " + name.getValue() 
                     + ", it works!"));
         });
-        
+
         layout.addComponents(name, button);
+
+        Securities securities = new Securities(154676, "AAPL","Apple","","Apple Inc.","US0378331005",1,
+                1281003,"Apple Inc","","","","common_share","stock_shares",
+                "EQRD","");
+
+//        try {
+//            Person.jaxb(securities);
+//        } catch (JAXBException e) {
+//            e.printStackTrace();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         List<Person> people = Arrays.asList(
                 new Person("Nicolaus Copernicus", 1543),
                 new Person("Galileo Galilei", 1564),
                 new Person("Johannes Kepler", 1571));
 
-// Create a grid bound to the list
         Grid<Person> grid = new Grid<>();
         grid.setItems(people);
         grid.addColumn(Person::getName).setCaption("Name");
