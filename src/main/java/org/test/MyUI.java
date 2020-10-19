@@ -1,7 +1,9 @@
 package org.test;
 
 import javax.servlet.annotation.WebServlet;
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -9,6 +11,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
@@ -42,13 +45,15 @@ public class MyUI extends UI {
                 1281003,"Apple Inc","","","","common_share","stock_shares",
                 "EQRD","");
 
-//        try {
-//            Person.jaxb(securities);
-//        } catch (JAXBException e) {
-//            e.printStackTrace();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            JAXBContext context = JAXBContext.newInstance(Securities.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.marshal(securities, new File("/root/Загрузки/secur.xml"));
+            marshaller.marshal(securities, System.out);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
 
         List<Person> people = Arrays.asList(
                 new Person("Nicolaus Copernicus", 1543),

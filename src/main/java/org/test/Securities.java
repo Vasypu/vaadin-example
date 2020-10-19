@@ -1,6 +1,6 @@
 package org.test;
 
-
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -23,6 +23,70 @@ import javax.xml.bind.annotation.XmlType;
         "primary_boardid",
         "marketprice_boardid"})
 public class Securities {
+    @XmlElement
+    public int getId() {
+        return id;
+    }
+    @XmlElement
+    public String getSecid() {
+        return secid;
+    }
+    @XmlElement
+    public String getShortname() {
+        return shortname;
+    }
+    @XmlElement
+    public String getRegnumber() {
+        return regnumber;
+    }
+    @XmlElement
+    public String getName() {
+        return name;
+    }
+    @XmlElement
+    public String getIsin() {
+        return isin;
+    }
+    @XmlElement
+    public int getIs_traded() {
+        return is_traded;
+    }
+    @XmlElement
+    public int getEmitent_id() {
+        return emitent_id;
+    }
+    @XmlElement
+    public String getEmitent_title() {
+        return emitent_title;
+    }
+    @XmlElement
+    public String getEmitent_inn() {
+        return emitent_inn;
+    }
+    @XmlElement
+    public String getEmitent_okpo() {
+        return emitent_okpo;
+    }
+    @XmlElement
+    public String getGosreg() {
+        return gosreg;
+    }
+    @XmlElement
+    public String getType() {
+        return type;
+    }
+    @XmlElement
+    public String getGroup() {
+        return group;
+    }
+    @XmlElement
+    public String getPrimary_boardid() {
+        return primary_boardid;
+    }
+    @XmlElement
+    public String getMarketprice_boardid() {
+        return marketprice_boardid;
+    }
 
     private int id;
     private String secid;
@@ -40,6 +104,8 @@ public class Securities {
     private String group;
     private String primary_boardid;
     private String marketprice_boardid;
+
+    public Securities () {}
 
     public Securities(int id, String secid, String shortname, String regnumber, String name, String isin, int is_traded,
                       int emitent_id, String emitent_title, String emitent_inn, String emitent_okpo, String gosreg,
