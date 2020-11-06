@@ -1,10 +1,9 @@
 package org.test;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@XmlRootElement(name = "document")
 @XmlType(propOrder = {
         "id",
         "secid",
@@ -22,72 +21,7 @@ import javax.xml.bind.annotation.XmlType;
         "group",
         "primary_boardid",
         "marketprice_boardid"})
-public class Securities {
-    @XmlElement
-    public int getId() {
-        return id;
-    }
-    @XmlElement
-    public String getSecid() {
-        return secid;
-    }
-    @XmlElement
-    public String getShortname() {
-        return shortname;
-    }
-    @XmlElement
-    public String getRegnumber() {
-        return regnumber;
-    }
-    @XmlElement
-    public String getName() {
-        return name;
-    }
-    @XmlElement
-    public String getIsin() {
-        return isin;
-    }
-    @XmlElement
-    public int getIs_traded() {
-        return is_traded;
-    }
-    @XmlElement
-    public int getEmitent_id() {
-        return emitent_id;
-    }
-    @XmlElement
-    public String getEmitent_title() {
-        return emitent_title;
-    }
-    @XmlElement
-    public String getEmitent_inn() {
-        return emitent_inn;
-    }
-    @XmlElement
-    public String getEmitent_okpo() {
-        return emitent_okpo;
-    }
-    @XmlElement
-    public String getGosreg() {
-        return gosreg;
-    }
-    @XmlElement
-    public String getType() {
-        return type;
-    }
-    @XmlElement
-    public String getGroup() {
-        return group;
-    }
-    @XmlElement
-    public String getPrimary_boardid() {
-        return primary_boardid;
-    }
-    @XmlElement
-    public String getMarketprice_boardid() {
-        return marketprice_boardid;
-    }
-
+public class Row {
     private int id;
     private String secid;
     private String shortname;
@@ -105,11 +39,78 @@ public class Securities {
     private String primary_boardid;
     private String marketprice_boardid;
 
-    public Securities () {}
+    @XmlAttribute
+    public int getId() {
+        return id;
+    }
+    public void setId (int id) { this.id = id; }
+    @XmlAttribute
+    public String getSecid() {
+        return secid;
+    }
+    @XmlAttribute
+    public String getShortname() {
+        return shortname;
+    }
+    @XmlAttribute
+    public String getRegnumber() {
+        return regnumber;
+    }
+    @XmlAttribute
+    public String getName() {
+        return name;
+    }
+    @XmlAttribute
+    public String getIsin() {
+        return isin;
+    }
+    @XmlAttribute
+    public int getIs_traded() {
+        return is_traded;
+    }
+    @XmlAttribute
+    public int getEmitent_id() {
+        return emitent_id;
+    }
+    @XmlAttribute
+    public String getEmitent_title() {
+        return emitent_title;
+    }
+    public void setEmitent_title (String emitent_title) { this.emitent_title = emitent_title;}
+    @XmlAttribute
+    public String getEmitent_inn() {
+        return emitent_inn;
+    }
+    @XmlAttribute
+    public String getEmitent_okpo() {
+        return emitent_okpo;
+    }
+    @XmlAttribute
+    public String getGosreg() {
+        return gosreg;
+    }
+    @XmlAttribute
+    public String getType() {
+        return type;
+    }
+    @XmlAttribute
+    public String getGroup() {
+        return group;
+    }
+    @XmlAttribute
+    public String getPrimary_boardid() {
+        return primary_boardid;
+    }
+    @XmlAttribute
+    public String getMarketprice_boardid() {
+        return marketprice_boardid;
+    }
 
-    public Securities(int id, String secid, String shortname, String regnumber, String name, String isin, int is_traded,
-                      int emitent_id, String emitent_title, String emitent_inn, String emitent_okpo, String gosreg,
-                      String type, String group, String primary_boardid, String marketprice_boardid) {
+    public Row() {}
+
+    public Row(int id, String secid, String shortname, String regnumber, String name, String isin, int is_traded,
+               int emitent_id, String emitent_title, String emitent_inn, String emitent_okpo, String gosreg,
+               String type, String group, String primary_boardid, String marketprice_boardid) {
         this.id = id;
         this.secid = secid;
         this.shortname = shortname;
