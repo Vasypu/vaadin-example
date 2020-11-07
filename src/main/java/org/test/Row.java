@@ -40,71 +40,68 @@ public class Row {
     private String marketprice_boardid;
 
     @XmlAttribute
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
     public void setId (int id) { this.id = id; }
+
     @XmlAttribute
-    public String getSecid() {
-        return secid;
-    }
+    public String getSecid() { return secid; }
+    public void setSecid(String secid) { this.secid = secid; }
+
     @XmlAttribute
-    public String getShortname() {
-        return shortname;
-    }
+    public String getShortname() { return shortname; }
+    public void setShortname(String shortname) { this.shortname = shortname; }
+
     @XmlAttribute
-    public String getRegnumber() {
-        return regnumber;
-    }
+    public String getRegnumber() { return regnumber; }
+    public void setRegnumber(String regnumber) { this.regnumber = regnumber; }
+
     @XmlAttribute
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
     @XmlAttribute
-    public String getIsin() {
-        return isin;
-    }
+    public String getIsin() { return isin; }
+    public void setIsin(String isin) { this.isin = isin; }
+
     @XmlAttribute
-    public int getIs_traded() {
-        return is_traded;
-    }
+    public int getIs_traded() { return is_traded; }
+    public void setIs_traded(int is_traded) { this.is_traded = is_traded; }
+
     @XmlAttribute
-    public int getEmitent_id() {
-        return emitent_id;
-    }
+    public int getEmitent_id() { return emitent_id; }
+    public void setEmitent_id(int emitent_id) { this.emitent_id = emitent_id; }
+
     @XmlAttribute
-    public String getEmitent_title() {
-        return emitent_title;
-    }
+    public String getEmitent_title() { return emitent_title; }
     public void setEmitent_title (String emitent_title) { this.emitent_title = emitent_title;}
+
     @XmlAttribute
-    public String getEmitent_inn() {
-        return emitent_inn;
-    }
+    public String getEmitent_inn() { return emitent_inn; }
+    public void setEmitent_inn(String emitent_inn) { this.emitent_inn = emitent_inn; }
+
     @XmlAttribute
-    public String getEmitent_okpo() {
-        return emitent_okpo;
-    }
+    public String getEmitent_okpo() { return emitent_okpo; }
+    public void setEmitent_okpo(String emitent_okpo) { this.emitent_okpo = emitent_okpo; }
+
     @XmlAttribute
-    public String getGosreg() {
-        return gosreg;
-    }
+    public String getGosreg() { return gosreg; }
+    public void setGosreg(String gosreg) { this.gosreg = gosreg; }
+
     @XmlAttribute
-    public String getType() {
-        return type;
-    }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+
     @XmlAttribute
-    public String getGroup() {
-        return group;
-    }
+    public String getGroup() { return group; }
+    public void setGroup(String group) { this.group = group; }
+
     @XmlAttribute
-    public String getPrimary_boardid() {
-        return primary_boardid;
-    }
+    public String getPrimary_boardid() { return primary_boardid; }
+    public void setPrimary_boardid(String primary_boardid) { this.primary_boardid = primary_boardid; }
+
     @XmlAttribute
-    public String getMarketprice_boardid() {
-        return marketprice_boardid;
-    }
+    public String getMarketprice_boardid() { return marketprice_boardid; }
+    public void setMarketprice_boardid(String marketprice_boardid) { this.marketprice_boardid = marketprice_boardid; }
 
     public Row() {}
 
