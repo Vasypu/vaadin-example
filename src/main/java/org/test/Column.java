@@ -2,6 +2,7 @@ package org.test;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 @XmlType(propOrder = {
         "name",
@@ -57,5 +58,21 @@ public class Column {
         this.type = type;
         this.bytes = bytes;
         this.max_size = max_size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Column column = (Column) o;
+        return Objects.equals(name, column.name) &&
+                Objects.equals(type, column.type) &&
+                Objects.equals(bytes, column.bytes) &&
+                Objects.equals(max_size, column.max_size);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type, bytes, max_size);
     }
 }

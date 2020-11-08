@@ -27,32 +27,34 @@ import java.util.List;
  */
 @Theme("mytheme")
 public class MyUI extends UI {
+    final VerticalLayout layout = new VerticalLayout();
+    private Document document;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
-        
-        try {
-            JAXBContext context = JAXBContext.newInstance(Document.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            Document document2 = (Document) unmarshaller.unmarshal(new File("/root/Загрузки/securities_1.xml"));
-//            document2.getData().getRows().forEach(row -> {
-//                System.out.println("row.getId " + row.getId() + " row.getShortname " + row.getShortname() + " row.getSecid " + row.getSecid());
-//            });
-            List<Row> columns = document2.getData().getRows();
-            Grid<Row> grid = new Grid<>();
-            grid.setItems(columns);
-            grid.addColumn(Row::getName).setCaption("Name");
-            grid.addColumn(Row::getShortname).setCaption("ShortName");
-            grid.setSizeFull();
-            layout.addComponent(grid);
-            setContent(layout);
 
+        try {
+            document = Parser.fromXml();
         } catch (JAXBException e) {
             e.printStackTrace();
         }
+        List<Row> columns = document.getData().getRows();
+        Grid<Row> grid = new Grid<>();
+        grid.setItems(columns);
+        grid.addColumn(Row::getSecid).setCaption("Secid");
+        grid.addColumn(Row::getShortname).setCaption("Name");
+        grid.setSizeFull();
+        layout.addComponent(grid);
 
+        Button create = new Button("Создать");
+        create.addClickListener(clickEvent -> {
 
+            CreateWindow window = new CreateWindow(document);
+            UI.getCurrent().addWindow(window);
+        });
+        layout.addComponent(create);
+
+        setContent(layout);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
