@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement(name = "document")
-public class Document {
+public class Securities {
     private Data data;
 
     @XmlElement
     public Data getData() {
         return data;
     }
-
     public void setData(Data data) {
         this.data = data;
     }
@@ -26,7 +25,6 @@ public class Document {
         public String getId() {
             return id;
         }
-
         public void setId(String id) {
             this.id = id;
         }
@@ -35,7 +33,6 @@ public class Document {
         public Metadata getMetadata() {
             return metadata;
         }
-
         public void setMetadata(Metadata metadata) {
             this.metadata = metadata;
         }
@@ -54,15 +51,15 @@ public class Document {
             }
         }
 
-        private List<Row> rows;
+        private List<RowSecurities> rowSecurities;
 
         @XmlElementWrapper(name = "rows")
         @XmlElement(name = "row")
-        public List<Row> getRows() {
-            if(rows == null) {
-                rows = new ArrayList<>();
+        public List<RowSecurities> getRowSecurities() {
+            if(rowSecurities == null) {
+                rowSecurities = new ArrayList<>();
             }
-            return rows;
+            return rowSecurities;
         }
     }
 }

@@ -21,7 +21,7 @@ import java.util.List;
         "group",
         "primary_boardid",
         "marketprice_boardid"})
-public class Row {
+public class RowSecurities {
     private int id;
     private String secid;
     private String shortname;
@@ -103,11 +103,11 @@ public class Row {
     public String getMarketprice_boardid() { return marketprice_boardid; }
     public void setMarketprice_boardid(String marketprice_boardid) { this.marketprice_boardid = marketprice_boardid; }
 
-    public Row() {}
+    public RowSecurities() {}
 
-    public Row(int id, String secid, String shortname, String regnumber, String name, String isin, int is_traded,
-               int emitent_id, String emitent_title, String emitent_inn, String emitent_okpo, String gosreg,
-               String type, String group, String primary_boardid, String marketprice_boardid) {
+    public RowSecurities(int id, String secid, String shortname, String regnumber, String name, String isin, int is_traded,
+                         int emitent_id, String emitent_title, String emitent_inn, String emitent_okpo, String gosreg,
+                         String type, String group, String primary_boardid, String marketprice_boardid) {
         this.id = id;
         this.secid = secid;
         this.shortname = shortname;

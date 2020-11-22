@@ -2,12 +2,7 @@ package org.test;
 
 import com.vaadin.ui.*;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,10 +10,10 @@ public class CreateWindow extends Window {
     final VerticalLayout layout1 = new VerticalLayout();
     final VerticalLayout layout2 = new VerticalLayout();
     final HorizontalLayout horizontalLayout = new HorizontalLayout();
-    private Document document;
+    private Securities securities;
 
-    public CreateWindow (Document document) {
-        this.document = document;
+    public CreateWindow (Securities securities) {
+        this.securities = securities;
 
         TextField id = new TextField("id");
         id.setWidth(250, Unit.PIXELS);
@@ -56,28 +51,28 @@ public class CreateWindow extends Window {
         layout1.addComponents(id, secid, shortname, regnumber, name, isin, is_traded, emitent_id);
         layout2.addComponents(emitent_title, emitent_inn, emitent_okpo, gosreg, type, group, primary_boardid, marketprice_boardid);
 
-        Row row = new Row();
-        row.setId(35);
-        row.setIs_traded(54);
-        row.setEmitent_id(4);
+        RowSecurities rowSecurities = new RowSecurities();
+        rowSecurities.setId(35);
+        rowSecurities.setIs_traded(54);
+        rowSecurities.setEmitent_id(4);
 
-        secid.addValueChangeListener(valueChangeEvent -> row.setSecid(valueChangeEvent.getValue()));
-        shortname.addValueChangeListener(valueChangeEvent -> row.setShortname(valueChangeEvent.getValue()));
-        regnumber.addValueChangeListener(valueChangeEvent -> row.setRegnumber(valueChangeEvent.getValue()));
-        name.addValueChangeListener(valueChangeEvent -> row.setName(valueChangeEvent.getValue()));
-        isin.addValueChangeListener(valueChangeEvent -> row.setIsin(valueChangeEvent.getValue()));
+        secid.addValueChangeListener(valueChangeEvent -> rowSecurities.setSecid(valueChangeEvent.getValue()));
+        shortname.addValueChangeListener(valueChangeEvent -> rowSecurities.setShortname(valueChangeEvent.getValue()));
+        regnumber.addValueChangeListener(valueChangeEvent -> rowSecurities.setRegnumber(valueChangeEvent.getValue()));
+        name.addValueChangeListener(valueChangeEvent -> rowSecurities.setName(valueChangeEvent.getValue()));
+        isin.addValueChangeListener(valueChangeEvent -> rowSecurities.setIsin(valueChangeEvent.getValue()));
 //            is_traded.addValueChangeListener(valueChangeEvent -> row.setIs_traded(valueChangeEvent.getValue()));
 //            emitent_id.addValueChangeListener(valueChangeEvent -> row.setEmitent_id(valueChangeEvent.getValue()));
-        emitent_title.addValueChangeListener(valueChangeEvent -> row.setEmitent_title(valueChangeEvent.getValue()));
-        emitent_inn.addValueChangeListener(valueChangeEvent -> row.setEmitent_inn(valueChangeEvent.getValue()));
-        emitent_okpo.addValueChangeListener(valueChangeEvent -> row.setEmitent_okpo(valueChangeEvent.getValue()));
-        gosreg.addValueChangeListener(valueChangeEvent -> row.setGosreg(valueChangeEvent.getValue()));
-        type.addValueChangeListener(valueChangeEvent -> row.setType(valueChangeEvent.getValue()));
-        group.addValueChangeListener(valueChangeEvent -> row.setGroup(valueChangeEvent.getValue()));
-        primary_boardid.addValueChangeListener(valueChangeEvent -> row.setPrimary_boardid(valueChangeEvent.getValue()));
-        marketprice_boardid.addValueChangeListener(valueChangeEvent -> row.setMarketprice_boardid(valueChangeEvent.getValue()));
+        emitent_title.addValueChangeListener(valueChangeEvent -> rowSecurities.setEmitent_title(valueChangeEvent.getValue()));
+        emitent_inn.addValueChangeListener(valueChangeEvent -> rowSecurities.setEmitent_inn(valueChangeEvent.getValue()));
+        emitent_okpo.addValueChangeListener(valueChangeEvent -> rowSecurities.setEmitent_okpo(valueChangeEvent.getValue()));
+        gosreg.addValueChangeListener(valueChangeEvent -> rowSecurities.setGosreg(valueChangeEvent.getValue()));
+        type.addValueChangeListener(valueChangeEvent -> rowSecurities.setType(valueChangeEvent.getValue()));
+        group.addValueChangeListener(valueChangeEvent -> rowSecurities.setGroup(valueChangeEvent.getValue()));
+        primary_boardid.addValueChangeListener(valueChangeEvent -> rowSecurities.setPrimary_boardid(valueChangeEvent.getValue()));
+        marketprice_boardid.addValueChangeListener(valueChangeEvent -> rowSecurities.setMarketprice_boardid(valueChangeEvent.getValue()));
 
-        document.getData().getRows().add(row);
+        securities.getData().getRowSecurities().add(rowSecurities);
 
         List<Column> columnList = Arrays.asList(new Column("id", "int32", "", ""),
                 new Column("secid","string","36","0"),
@@ -96,17 +91,17 @@ public class CreateWindow extends Window {
                 new Column("primary_boardid", "string", "12", "0"),
                 new Column("marketprice_boardid", "string", "12", "0"));
 
-        if (!document.getData().getMetadata().getColumns().equals(columnList)) {
-            document.getData().getMetadata().getColumns().clear();
-            document.getData().getMetadata().getColumns().addAll(columnList);
+        if (!securities.getData().getMetadata().getColumns().equals(columnList)) {
+            securities.getData().getMetadata().getColumns().clear();
+            securities.getData().getMetadata().getColumns().addAll(columnList);
         }
 
-        document.getData().setId("securities");
+        securities.getData().setId("securities");
 
         Button create = new Button("Создать");
         create.addClickListener(clickEvent -> {
             try {
-                Parser.toXml(document);
+                Parser.toXml(securities);
             } catch (JAXBException e) {
                 e.printStackTrace();
             }

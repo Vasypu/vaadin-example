@@ -1,10 +1,7 @@
 package org.test;
 
 import javax.servlet.annotation.WebServlet;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -12,10 +9,6 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,31 +21,69 @@ import java.util.List;
 @Theme("mytheme")
 public class MyUI extends UI {
     final VerticalLayout layout = new VerticalLayout();
-    private Document document;
+    private Securities securities;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
 
         try {
-            document = Parser.fromXml();
+            securities = Parser.fromXml();
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        List<Row> columns = document.getData().getRows();
-        Grid<Row> grid = new Grid<>();
+
+        History history = new History();
+        HistoryData historyData = new HistoryData();
+        HistoryData.Metadata metadata = new HistoryData.Metadata();
+        historyData.setMetadata(metadata);
+        historyData.getMetadata().getColumns().add(new Column("sdfs", "sdfs", "sdfs", "sdfs"));
+        historyData.getMetadata().getColumns().add(new Column("sdfs324", "sd234fs", "sddfghfs", "sdshtfs"));
+        historyData.getMetadata().getColumns().add(new Column("sdfs234", "sd3456fs", "sdfghjfs", "sdfsdfhs"));
+        historyData.getRowHistories().add(new RowHistory("TQBR", "2020-04-15", "АбрауДюрсо", "ABRD", "171", "734875", "135.5", "133.5", "136.5", "134.5", "135",
+                "134.5", "5440", "135", "135", "134.5", "734875", "734875", "734875", ""));
+        historyData.setId("history");
+        history.getHistoryDataList().add(historyData);
+
+        HistoryData historyData1 = new HistoryData();
+        HistoryData.Metadata metadata1 = new HistoryData.Metadata();
+        historyData1.setMetadata(metadata1);
+        historyData1.getMetadata().getColumns().add(new Column("INDEX", "int64", "", ""));
+        historyData1.getMetadata().getColumns().add(new Column("TOTAL", "int64", "", ""));
+        historyData1.getMetadata().getColumns().add(new Column("PAGESIZE", "int64", "", ""));
+        historyData1.getRowHistories().add(new RowHistory("TQBR", "2020-04-15", "АбрауДюрсо", "ABRD", "171", "734875", "135.5", "133.5", "136.5", "134.5", "135",
+                "134.5", "5440", "135", "135", "134.5", "734875", "734875", "734875", ""));
+        historyData1.setId("history.cursor");
+        history.getHistoryDataList().add(historyData1);
+        try {
+            Parser.toXmlHistory(history);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+        List<RowSecurities> columns = securities.getData().getRowSecurities();
+        Grid<RowSecurities> grid = new Grid<>();
         grid.setItems(columns);
-        grid.addColumn(Row::getSecid).setCaption("Secid");
-        grid.addColumn(Row::getShortname).setCaption("Name");
+        grid.addColumn(RowSecurities::getSecid).setCaption("Secid");
+        grid.addColumn(RowSecurities::getShortname).setCaption("Name");
+//        grid.addContextClickListener(contextClickEvent -> {
+//            System.out.println("contextClickEvent " + contextClickEvent.toString());
+//        });
         grid.setSizeFull();
         layout.addComponent(grid);
 
         Button create = new Button("Создать");
         create.addClickListener(clickEvent -> {
 
-            CreateWindow window = new CreateWindow(document);
+            CreateWindow window = new CreateWindow(securities);
             UI.getCurrent().addWindow(window);
         });
-        layout.addComponent(create);
+
+        Button open = new Button("Открыть");
+        open.addClickListener(clickEvent -> {
+            OpenWindow window = new OpenWindow(grid);
+            UI.getCurrent().addWindow(window);
+        });
+        layout.addComponents(create, open);
 
         setContent(layout);
     }
